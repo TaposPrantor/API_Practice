@@ -1,5 +1,9 @@
+import 'dart:developer';
+
 import 'package:api_project/database/data.dart';
 import 'package:flutter/material.dart';
+
+import '../service/product_list.dart';
 
 class ProductScreen extends StatefulWidget {
   const ProductScreen({super.key});
@@ -11,16 +15,23 @@ class ProductScreen extends StatefulWidget {
 class _ProductScreenState extends State<ProductScreen> {
 
   List myProduct = [];
+
   getProduct()async{
-    myProduct.clear();
-    await Future.delayed(Duration(seconds: 3));
-    myProduct.addAll(MyData.data);
+    var a = await ProductService().getProductList();
+    log("=====++++++++++++++${a.length}");
+    myProduct = a;
+    // myProduct.clear();
+    // log("====777===");
+    // await Future.delayed(Duration(seconds: 3));
+    // myProduct.addAll(MyData.data);
     setState(() {});
   }
 
   @override
   void initState(){
+    log("===2222===");
     getProduct();
+    log("===1111===");
     super.initState();
   }
 
