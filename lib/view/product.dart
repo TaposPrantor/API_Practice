@@ -33,7 +33,9 @@ class _ProductScreenState extends State<ProductScreen> {
         backgroundColor: Colors.orange.shade50,
       ),
 
-      body: ListView.builder(
+      body: myProduct.length == 0 ?
+      CircularProgressIndicator()
+      :ListView.builder(
         itemCount: myProduct.length,
           itemBuilder: (c,i)=>Padding(
             padding: const EdgeInsets.symmetric(vertical: 3, horizontal: 6),
