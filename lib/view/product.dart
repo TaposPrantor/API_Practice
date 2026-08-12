@@ -29,9 +29,7 @@ class _ProductScreenState extends State<ProductScreen> {
 
   @override
   void initState(){
-    log("===2222===");
     getProduct();
-    log("===1111===");
     super.initState();
   }
 
@@ -42,6 +40,10 @@ class _ProductScreenState extends State<ProductScreen> {
         title: Text("Product List"),
         centerTitle: true,
         backgroundColor: Colors.orange.shade50,
+        actions: [
+          Text("Tapos Roy"),
+          SizedBox(width: 30,)
+        ],
       ),
 
       body: myProduct.length == 0 ?
