@@ -11,8 +11,9 @@ class ProductScreen extends StatefulWidget {
 class _ProductScreenState extends State<ProductScreen> {
 
   List myProduct = [];
-  getProduct(){
+  getProduct()async{
     myProduct.clear();
+    await Future.delayed(Duration(seconds: 3));
     myProduct.addAll(MyData.data);
     setState(() {});
   }
