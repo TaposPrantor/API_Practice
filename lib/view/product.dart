@@ -1,3 +1,4 @@
+import 'package:api_project/database/data.dart';
 import 'package:flutter/material.dart';
 
 class ProductScreen extends StatefulWidget {
@@ -8,6 +9,20 @@ class ProductScreen extends StatefulWidget {
 }
 
 class _ProductScreenState extends State<ProductScreen> {
+
+  List myProduct = [];
+  getProduct(){
+    myProduct.clear();
+    myProduct.addAll(MyData.data);
+    setState(() {});
+  }
+
+  @override
+  void initState(){
+    getProduct();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,6 +33,7 @@ class _ProductScreenState extends State<ProductScreen> {
       ),
 
       body: ListView.builder(
+        itemCount: myProduct.length,
           itemBuilder: (c,i)=>Padding(
             padding: const EdgeInsets.symmetric(vertical: 3, horizontal: 6),
             child: Card(
@@ -31,34 +47,21 @@ class _ProductScreenState extends State<ProductScreen> {
                         width: 120,
                         decoration: BoxDecoration(
                           image: DecorationImage(
-                              image: NetworkImage("")
+                              image: NetworkImage("${myProduct[i]['image']}")
                           )
                         ),
                       )
                   ),
                   Expanded(
-                    flex: 2,
+                    flex: 3,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text("Data", style: TextStyle(fontSize: 18,fontWeight: FontWeight.w500),),
-                        Text("Category: Apex/Bata", style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500),),
-                        Text("Price: 120", style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500),),
-                        Text("Rating: 5", style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500),),
-                        Text("Review: 517", style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500),),
-                      ],
-                    ),
-                  ),
-                  Expanded(
-                    flex: 2,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text("Data", style: TextStyle(fontSize: 18,fontWeight: FontWeight.w500),),
-                        Text("Category: Apex/Bata", style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500),),
-                        Text("Price: 120", style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500),),
-                        Text("Rating: 5", style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500),),
-                        Text("Review: 517", style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500),),
+                        Text("${myProduct[i]['title']}", style: TextStyle(fontSize: 18,fontWeight: FontWeight.w500),),
+                        Text("Category: ${myProduct[i]['category']}", style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500),),
+                        Text("Price : ${myProduct[i]['price']}", style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500),),
+                        Text("Rating: ${myProduct[i]['rating']['rate']}", style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500),),
+                        Text("Review: ${myProduct[i]['rating']['count']}", style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500),),
                       ],
                     ),
                   ),
