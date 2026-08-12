@@ -34,7 +34,7 @@ class _ProductScreenState extends State<ProductScreen> {
       ),
 
       body: myProduct.length == 0 ?
-      CircularProgressIndicator()
+      Center(child: CircularProgressIndicator())
       :ListView.builder(
         itemCount: myProduct.length,
           itemBuilder: (c,i)=>Padding(
