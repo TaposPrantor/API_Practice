@@ -1,30 +1,48 @@
-
-import 'package:api_project/service/countries.dart';
 import 'package:flutter/material.dart';
 
+import '../service/countries.dart';
 
-class Countries extends StatelessWidget {
+class Countries extends StatefulWidget {
   const Countries({super.key});
 
+  @override
+  State<Countries> createState() => _CountriesState();
+}
+
+class _CountriesState extends State<Countries> {
+
+  List cl = [];
+
   getData()async{
-    await CountriesService().getCountries();
+    var a = await CountriesService().getCountries();
+    cl.clear();
+    cl.addAll(a);
+    setState(() {
+
+    });
   }
 
+  @override
+  void initState(){
+    getData();
+    super.initState();
+  }
+
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        title: Text("UN Country List - ${cl.length}"),
         centerTitle: true,
-        title: Text("UN Country List"),
-        backgroundColor: Colors.yellow.shade200,
+        backgroundColor: Colors.yellow.shade50,
       ),
       body: ListView.builder(
-        itemCount: 10,
-          itemBuilder: (c, i)=>ListTile(
-            title: Text("Title"),
-            subtitle: Text("SubTitle"),
+        itemCount: cl.length,
+          itemBuilder: (c,i)=>ListTile(
+            title: Text("${cl[i]['name']}"),
+            subtitle: Text("${cl[i]['admissionDateUnitedNations']}"),
           )
-
       ),
     );
   }
